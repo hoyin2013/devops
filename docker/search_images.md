@@ -3,7 +3,7 @@
 2. 登录以后就可以在镜像广场里搜索相关镜像并下载了。
 
 # 几个常用的镜像站点
-https://c.163yun.com/   登录以后访问，找到镜像中心，然后搜索想要的镜像
-https://hub.daocloud.io/   daoCloud  不需要登录，直接可以访问
+- https://c.163yun.com/   登录以后访问，找到镜像中心，然后搜索想要的镜像
+- https://hub.daocloud.io/   daoCloud  不需要登录，直接可以访问
 
 
