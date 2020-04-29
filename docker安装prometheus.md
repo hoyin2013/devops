@@ -126,5 +126,41 @@ prom/mysqld-exporter
 docker logs -f --tail 10 mysqld-exporter
 
 ```
-promtool check config prometheus.yml
 
+## 安装pushgateway
+
+```bash
+docker pull prom/pushgateway
+
+docker run -d \
+  --name=pg \
+  -p 9091:9091 \
+  prom/pushgateway
+
+# 在prometheus中添加pushgateway相关代码
+
+vi /opt/prometheus/prometheus.yml
+
+  - job_name: pushgateway
+    static_configs:
+      - targets: ['10.128.128.210:9091']
+        labels:
+          instance: pushgateway
+
+# 重启prometheus
+docker restart prometheus
+
+# 查看target
+http://10.128.128.210:9090/targets
+
+# 测试效果
+echo "some_metric 3.14" | curl --data-binary @- http://10.128.128.210:9091/metrics/job/mysql
+
+# 删除某个组下的某实例的所有数据：
+curl -X DELETE http://pushgateway.example.org:9091/metrics/job/some_job/instance/some_instance
+
+
+# 删除某个组下的所有数据：
+curl -X DELETE http://pushgateway.example.org:9091/metrics/job/some_job
+
+```
